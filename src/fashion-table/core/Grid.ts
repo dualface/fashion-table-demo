@@ -23,11 +23,36 @@ enum GridColumnGrouping {
 }
 
 /**
+ * 列头
+ */
+interface GridColumnHeader {
+    /**
+     * 列的 ID
+     */
+    id: string;
+
+    /**
+     * 列在网格中的索引（处于第几列）
+     */
+    index: number;
+
+    /**
+     * 列的排序状态
+     */
+    sorting: GridColumnSorting;
+
+    /**
+     * 列的分组状态
+     */
+    grouping: GridColumnGrouping;
+}
+
+/**
  * 网格的一列
  *
  * 考虑到表格中，行数通常会远远超过列数，所以数据以列的形式组织。
  */
-class GridColumn {
+class GridColumn implements GridColumnHeader {
     /**
      * 列的 ID
      */
