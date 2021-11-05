@@ -78,4 +78,10 @@ export interface GridState {
      * @param count
      */
     deleteRows(start: number, count: number): RowState[];
+
+    /**
+     *
+     * @param key
+     */
+    getRow(key: string | number): RowState;
 }
