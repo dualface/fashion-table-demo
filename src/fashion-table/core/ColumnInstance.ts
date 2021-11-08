@@ -10,7 +10,6 @@ import {ColumnState} from './ColumnState';
  */
 export class ColumnInstance implements ColumnState {
     readonly id: string;
-    index: number;
     sorting: ColumnSorting;
     grouping: ColumnGrouping;
 
@@ -19,9 +18,8 @@ export class ColumnInstance implements ColumnState {
      */
     readonly cells = new Array<CellState>();
 
-    constructor(id: string, index: number, sorting: ColumnSorting, grouping: ColumnGrouping) {
+    constructor(id: string, sorting: ColumnSorting, grouping: ColumnGrouping) {
         this.id = id;
-        this.index = index;
         this.sorting = sorting;
         this.grouping = grouping;
     }

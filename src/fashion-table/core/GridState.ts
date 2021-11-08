@@ -1,5 +1,4 @@
-import {ColumnState} from './ColumnState';
-import {RowState} from './RowState';
+import {CellIterator} from './Iterator';
 
 /**
  * 网格
@@ -11,77 +10,34 @@ export interface GridState {
     readonly id: string;
 
     /**
-     * 行总数
-     */
-    readonly countOfRows: number;
-
-    /**
-     * 列总数
-     */
-    readonly countOfColumns: number;
-
-    /**
-     * 追加一列
-     *
-     * @param id
-     */
-    appendColumn(id: string): ColumnState;
-
-    /**
-     * 在指定列号插入，如果是在最后插入等同于追加一列
-     *
-     * @param index
-     * @param id
-     */
-    insertColumn(index: number, id: string): ColumnState;
-
-    /**
-     * 删除指定列，返回被删除的 ColumnState
+     * 获得列单元格迭代器，用于遍历列中的所有单元格
      *
      * @param key
      */
-    deleteColumn(key: string | number): ColumnState;
+    queryCellsInColumn(key: string | number): CellIterator;
 
     /**
-     * 取得指定 ID 或索引的列
+     * 取得行单元格迭代器，用于遍历行中的所有单元格
      *
      * @param key
      */
-    getColumn(key: string | number): ColumnState;
+    queryCellsInRow(key: string | number): CellIterator;
 
     /**
-     * 追加一行
-     *
-     * @param id
-     */
-    appendRow(id: string): RowState;
-
-    /**
-     * 在指定行号插入，如果是在最后插入等同于追加一行
-     *
-     * @param index
-     * @param id
-     */
-    insertRow(index: number, id: string): RowState;
-
-    /**
-     * 删除一行，返回被删除的 GridRow
-     *
-     * @param index
-     */
-    deleteRow(index: number): RowState;
-
-    /**
-     * 从指定行开始删除，返回所有被删除的 GridRow
+     * 取得遍历多行单元格的迭代器
      *
      * @param start
      * @param count
      */
-    deleteRows(start: number, count: number): RowState[];
+    queryCellsInRows(start: number, count: number): CellIterator;
 
     /**
+     * 取得遍历特定矩形区域单元格的迭代器
      *
-     * @param key
+     * @param startRow
+     * @param countOfRows
+     * @param startColumn
+     * @param countOfColumns
      */
-    getRow(key: string | number): RowState;
+    queryCellsInRect(startRow: number, countOfRows: number, startColumn: number, countOfColumns: number): CellIterator;
 }

@@ -1,0 +1,19 @@
+{
+  "$id": "ProductSchema",
+  "properties": {
+    "title": {
+      "type": "string"
+    },
+    "kind": {
+      "type": "string"
+    },
+    "price": {
+      "type": "number"
+    }
+  },
+  "required": [
+    "title",
+    "kind",
+    "price"
+  ]
+}

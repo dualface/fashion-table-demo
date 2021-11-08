@@ -1,15 +1,23 @@
 import {CellState} from './CellState';
-import {ColumnState} from './ColumnState';
 
+/**
+ * 迭代器回调
+ */
 export interface IteratorCallback<T> {
     (index: number): T | undefined;
 }
 
+/**
+ * 迭代器
+ */
 export interface Iterator<T> {
     next(): T | undefined;
 }
 
-class GenericIterator<T> {
+/**
+ * 迭代器实现
+ */
+export class GenericIterator<T> {
     private readonly _next: IteratorCallback<T>;
     private _index = 0;
     private _completed = false;
@@ -33,4 +41,8 @@ class GenericIterator<T> {
 
 }
 
-export type CellIterator = GenericIterator<CellState>;
+/**
+ * 单元格迭代器
+ */
+export class CellIterator extends GenericIterator<CellState> {
+}

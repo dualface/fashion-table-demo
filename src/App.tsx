@@ -1,60 +1,34 @@
+import {createForm} from '@formily/core';
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
+import {createProducts, createSellers, createSells} from './demo/DataFactory';
+import {CellState} from './fashion-table/core/CellState';
+import {JsonDataSource} from './fashion-table/datasource/JsonDataSource';
+import RowRenderer from './fashion-table/ui/antd/components/RowRenderer';
 
-import {createForm} from '@formily/core'
-import {Field, FormConsumer, FormProvider} from '@formily/react'
-import {FormButtonGroup, FormItem, FormLayout, Input, Submit,} from '@formily/antd'
+const form = createForm();
 
-const form = createForm()
-
+const products = createProducts(50);
+const sellers = createSellers(10);
+const sells = createSells(products, sellers, 1000);
+const dataset = JSON.stringify({products, sellers, sells});
+const dataSource = new JsonDataSource();
 
 function App() {
+
+    const cells: CellState[] = [];
+    for (const product of products) {
+        cells.push({
+            id: product.title,
+            content: product.title,
+        });
+    }
+
     return (
         <div className="App">
-            <header className="App-header">
-                <img src={logo} className="App-logo" alt="logo"/>
-                <p>
-                    Edit <code>src/App.tsx</code> and save to reload.
-                </p>
-                <a
-                    className="App-link"
-                    href="https://reactjs.org"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                >
-                    Learn React
-                </a>
-
-                <FormProvider form={form}>
-                    <FormLayout layout="vertical">
-                        <Field
-                            name="input"
-                            title="输入框"
-                            required
-                            initialValue="Hello world"
-                            decorator={[FormItem]}
-                            component={[Input]}
-                        />
-                    </FormLayout>
-                    <FormConsumer>
-                        {() => (
-                            <div
-                                style={{
-                                    marginBottom: 20,
-                                    padding: 5,
-                                    border: '1px dashed #666',
-                                }}
-                            >
-                                实时响应：{form.values.input}
-                            </div>
-                        )}
-                    </FormConsumer>
-                    <FormButtonGroup>
-                        <Submit onSubmit={console.log}>提交</Submit>
-                    </FormButtonGroup>
-                </FormProvider>
-            </header>
+            <table>
+                <RowRenderer cells={cells}/>
+            </table>
         </div>
     );
 }
