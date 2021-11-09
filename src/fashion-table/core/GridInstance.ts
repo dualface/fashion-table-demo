@@ -1,5 +1,5 @@
 import {CellState} from './CellState';
-import {ColumnInstance} from './ColumnInstance';
+import {Column} from '../schema/Column';
 import {GenericOrderedMap} from './GenericOrderedMap';
 import {GridState} from './GridState';
 import {CellIterator} from './Iterator';
@@ -7,7 +7,7 @@ import {RowInstance} from './RowInstance';
 
 export class GridInstance implements GridState {
     readonly id: string;
-    readonly columns = new GenericOrderedMap<ColumnInstance>();
+    readonly columns = new GenericOrderedMap<Column>();
     readonly rows = new GenericOrderedMap<RowInstance>();
 
     constructor(id: string) {

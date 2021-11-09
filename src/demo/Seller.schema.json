@@ -1,5 +1,6 @@
 {
-  "$id": "SellerSchema",
+  "$id": "Seller.schema",
+  "type": "object",
   "properties": {
     "name": {
       "type": "string"

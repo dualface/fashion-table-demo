@@ -1,7 +1,7 @@
 /**
  * 行的种类
  */
-export enum RowKind {
+export enum RowType {
     CellSet,
     Virtual,
 }

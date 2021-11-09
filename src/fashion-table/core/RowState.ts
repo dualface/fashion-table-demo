@@ -1,16 +1,4 @@
-import {RowKind} from './RowKind';
+import {RowSchema} from '../schema/RowSchema';
 
-/**
- * 网格的一行
- */
-export interface RowState {
-    /**
-     * 行的 ID
-     */
-    readonly id: string;
-
-    /**
-     * 行的种类
-     */
-    readonly kind: RowKind;
+export interface RowState extends RowSchema {
 }

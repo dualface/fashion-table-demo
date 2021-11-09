@@ -1,0 +1,21 @@
+{
+  "$id": "FashionTable.schema",
+  "type": "object",
+  "properties": {
+    "primaryColumnId": {
+      "type": "string"
+    },
+    "columns": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/column"
+      },
+      "minItems": 1,
+      "uniqueItems": true
+    }
+  },
+  "required": [
+    "primaryColumnId",
+    "columns"
+  ]
+}

@@ -1,22 +1,14 @@
-import {ColumnGrouping} from './ColumnGrouping';
-import {ColumnSorting} from './ColumnSorting';
+import {ColumnSchema} from '../schema/ColumnSchema';
+import {CellState} from './CellState';
 
 /**
- * 列
+ * 网格的一列
+ *
+ * 考虑到表格中，行数通常会远远超过列数，所以数据以列的形式组织。
  */
-export interface ColumnState {
+export interface ColumnState extends ColumnSchema {
     /**
-     * 列的 ID
+     * 该列包含的所有单元格
      */
-    readonly id: string;
-
-    /**
-     * 列的排序状态
-     */
-    sorting: ColumnSorting;
-
-    /**
-     * 列的分组状态
-     */
-    grouping: ColumnGrouping;
+    readonly cells: Array<CellState>;
 }

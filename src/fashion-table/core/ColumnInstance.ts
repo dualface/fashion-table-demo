@@ -1,6 +1,6 @@
+import {ColumnGroupingValue} from '../schema/ColumnGroupingValue';
+import {ColumnSorting} from '../schema/ColumnSorting';
 import {CellState} from './CellState';
-import {ColumnGrouping} from './ColumnGrouping';
-import {ColumnSorting} from './ColumnSorting';
 import {ColumnState} from './ColumnState';
 
 /**
@@ -10,18 +10,23 @@ import {ColumnState} from './ColumnState';
  */
 export class ColumnInstance implements ColumnState {
     readonly id: string;
-    sorting: ColumnSorting;
-    grouping: ColumnGrouping;
+    title: string;
+    size = 'auto';
+    sorting = ColumnSorting.None;
+    grouping = false;
+    groupingValue = ColumnGroupingValue.Count;
+    dragEnabled = true;
+    sortingEnabled = true;
+    groupingEnabled = true;
 
     /**
      * 该列包含的所有单元格
      */
     readonly cells = new Array<CellState>();
 
-    constructor(id: string, sorting: ColumnSorting, grouping: ColumnGrouping) {
+    constructor(id: string, title: string | undefined) {
         this.id = id;
-        this.sorting = sorting;
-        this.grouping = grouping;
+        this.title = title ? title : id;
     }
 
     /**
@@ -55,4 +60,5 @@ export class ColumnInstance implements ColumnState {
         }
         this.cells.splice(row, 1);
     }
+
 }

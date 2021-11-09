@@ -1,5 +1,5 @@
 {
-  "$id": "SellSchema",
+  "$id": "Sell.schema",
   "type": "object",
   "properties": {
     "product": {

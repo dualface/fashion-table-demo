@@ -1,15 +1,12 @@
-import {RowKind} from './RowKind';
+import {RowType} from '../schema/RowType';
 import {RowState} from './RowState';
 
-/**
- * 行实例
- */
 export class RowInstance implements RowState {
     readonly id: string;
-    readonly kind: RowKind;
+    readonly type: RowType;
 
-    constructor(id: string, kind: RowKind) {
+    constructor(id: string, type: RowType) {
         this.id = id;
-        this.kind = kind;
+        this.type = type;
     }
 }
