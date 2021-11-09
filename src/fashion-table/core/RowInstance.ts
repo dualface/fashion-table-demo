@@ -1,11 +1,17 @@
 import {RowType} from '../schema/RowType';
-import {RowState} from './RowState';
 
-export class RowInstance implements RowState {
+export class RowInstance {
+    /**
+     * 行 ID
+     */
     readonly id: string;
+
+    /**
+     * 行类型
+     */
     readonly type: RowType;
 
-    constructor(id: string, type: RowType) {
+    constructor(id: string, type = RowType.CellSet) {
         this.id = id;
         this.type = type;
     }

@@ -1,32 +1,30 @@
-import {ColumnGroupingValue} from '../schema/ColumnGroupingValue';
-import {ColumnSorting} from '../schema/ColumnSorting';
+import {ColumnSchema} from '../schema/ColumnSchema';
 import {CellState} from './CellState';
-import {ColumnState} from './ColumnState';
 
 /**
  * 网格的一列
  *
  * 考虑到表格中，行数通常会远远超过列数，所以数据以列的形式组织。
  */
-export class ColumnInstance implements ColumnState {
+export class ColumnInstance {
+    /**
+     * 列的 ID
+     */
     readonly id: string;
-    title: string;
-    size = 'auto';
-    sorting = ColumnSorting.None;
-    grouping = false;
-    groupingValue = ColumnGroupingValue.Count;
-    dragEnabled = true;
-    sortingEnabled = true;
-    groupingEnabled = true;
+
+    /**
+     * Schema
+     */
+    readonly schema: ColumnSchema;
 
     /**
      * 该列包含的所有单元格
      */
-    readonly cells = new Array<CellState>();
+    readonly cells: CellState[] = [];
 
-    constructor(id: string, title: string | undefined) {
-        this.id = id;
-        this.title = title ? title : id;
+    constructor(schema: ColumnSchema) {
+        this.id = schema.id;
+        this.schema = schema;
     }
 
     /**

@@ -2,12 +2,24 @@ export interface Identifiable {
     id: string;
 }
 
-export class GenericOrderedMap<T extends Identifiable> {
+export class GenericOrderedMap<T extends Identifiable> implements Iterable<T> {
     private readonly _orderedIds: string[] = [];
     private readonly _items = new Map<string, T>();
 
     get length(): number {
         return this._orderedIds.length;
+    }
+
+    * [Symbol.iterator](): Iterator<T> {
+        const l = this._orderedIds.length;
+        for (let i = 0; i < l; i++) {
+            const item = this._items.get(this._orderedIds[i]);
+            if (item) {
+                yield item;
+            } else {
+                break;
+            }
+        }
     }
 
     has(id: string): boolean {
@@ -85,19 +97,23 @@ export class GenericOrderedMap<T extends Identifiable> {
         return items;
     }
 
-    get(key: string | number): [T, number] {
+    get(key: string | number): T {
         if (typeof key === 'string') {
             if (!this._items.has(key)) {
                 throw new RangeError(`not found item by id "${key}"`);
             }
-            return [this._items.get(key)!, this._orderedIds.indexOf(key)];
+            return this._items.get(key)!;
         } else {
             const l = this._orderedIds.length;
             if (key < 0 || key >= l) {
                 throw new RangeError(`index "${key}" out of range, count of items is ${l}`);
             }
-            return [this._items.get(this._orderedIds[key])!, key];
+            return this._items.get(this._orderedIds[key])!;
         }
+    }
+
+    indexOf(item: T): number {
+        return this._orderedIds.indexOf(item.id);
     }
 
     fetch(start: number, count: number): T[] {

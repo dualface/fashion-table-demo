@@ -18,8 +18,9 @@ export interface Seller {
  * 销售记录
  */
 export interface Sell {
-    product: Product;
-    seller: Seller;
+    id: string;
+    product: string;
+    seller: string;
     quantity: number;
 }
 
@@ -31,7 +32,7 @@ export function createProducts(count: number): Product[] {
         products.push({
             title: `Product${i}`,
             kind: randomIn<string>(ProductKinds),
-            price: Math.ceil(Math.random() * 100) + 1,
+            price: Math.floor(Math.random() * 100) + 1,
         });
     }
     return products;
@@ -51,15 +52,16 @@ export function createSells(products: Product[], sellers: Seller[], count: numbe
     const sells: Sell[] = [];
     for (let i = 0; i < count; i++) {
         sells.push({
-            product: randomIn<Product>(products),
-            seller: randomIn<Seller>(sellers),
-            quantity: Math.ceil(Math.random() * 10)+1,
+            id: i.toString(),
+            product: randomIn<Product>(products).title,
+            seller: randomIn<Seller>(sellers).name,
+            quantity: Math.floor(Math.random() * 10)+1,
         })
     }
     return sells;
 }
 
 function randomIn<T>(sources: T[]): T {
-    const index = Math.ceil(Math.random() * sources.length);
+    const index = Math.floor(Math.random() * sources.length);
     return sources[index];
 }

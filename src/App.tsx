@@ -1,34 +1,58 @@
-import {createForm} from '@formily/core';
+import 'antd/dist/antd.css';
+import 'moment/locale/zh-cn';
 import React from 'react';
 import './App.css';
 import {createProducts, createSellers, createSells} from './demo/DataFactory';
-import {CellState} from './fashion-table/core/CellState';
+import {GridInstance} from './fashion-table/core/GridInstance';
 import {JsonDataSource} from './fashion-table/datasource/JsonDataSource';
-import RowRenderer from './fashion-table/ui/antd/components/RowRenderer';
-
-const form = createForm();
+import {ColumnSorting} from './fashion-table/schema/ColumnSorting';
+import GridRenderer from './fashion-table/ui/antd/components/GridRenderer';
 
 const products = createProducts(50);
 const sellers = createSellers(10);
-const sells = createSells(products, sellers, 1000);
-const dataset = JSON.stringify({products, sellers, sells});
-const dataSource = new JsonDataSource();
+const sells = createSells(products, sellers, 100);
+const dataset = JSON.stringify(sells);
 
 function App() {
-
-    const cells: CellState[] = [];
-    for (const product of products) {
-        cells.push({
-            id: product.title,
-            content: product.title,
-        });
-    }
+    const schema = {
+        id: 'SellReport',
+        columns: [
+            {
+                id: 'id',
+                title: 'Sell ID',
+                sorting: ColumnSorting.Asc,
+                sortingEnabled: true,
+            },
+            {
+                id: 'product',
+                title: 'Product',
+                groupingEnabled: true,
+                sortingEnabled: true,
+                dragEnabled: true
+            },
+            {
+                id: 'seller',
+                title: 'Seller',
+                groupingEnabled: true,
+                sortingEnabled: true,
+                dragEnabled: true
+            },
+            {
+                id: 'quantity',
+                title: 'Quantity',
+                sortingEnabled: true,
+                dragEnabled: true
+            },
+        ],
+        primaryColumnId: 'id',
+    };
+    const dataSource = new JsonDataSource();
+    dataSource.load(dataset);
+    const grid = new GridInstance(schema, dataSource);
 
     return (
         <div className="App">
-            <table>
-                <RowRenderer cells={cells}/>
-            </table>
+            <GridRenderer grid={grid}/>
         </div>
     );
 }

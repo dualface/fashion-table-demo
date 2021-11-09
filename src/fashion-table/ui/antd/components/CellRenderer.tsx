@@ -2,7 +2,11 @@ import React, {FC} from 'react';
 import {CellState} from '../../../core/CellState';
 
 const CellRenderer: FC<{ cell: CellState }> = ({cell}) => {
-    return (<td>{cell.content.toString()}</td>);
+    return (
+        <div key={cell.id} className="fashion-table-cell">
+            {cell.content ? cell.content.toString() : 'null'}
+        </div>
+    );
 };
 
 export default CellRenderer;

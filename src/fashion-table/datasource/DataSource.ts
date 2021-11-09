@@ -1,6 +1,6 @@
-import {GenericIterator} from '../core/Iterator';
+import {GenericIterator} from '../core/GenericIterator';
 
-export class RowIterator extends GenericIterator<object> {
+export class RowIterator extends GenericIterator<any> {
 }
 
 export interface DataSource {

@@ -22,7 +22,7 @@ export class JsonDataSource implements DataSource {
 
     query(): RowIterator {
         const l = this._data.length;
-        return new RowIterator((index: number): object | undefined => {
+        return new RowIterator((index: number): any => {
             if (index >= l) {
                 return undefined;
             }
