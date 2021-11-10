@@ -20,12 +20,13 @@ function App() {
             {
                 id: 'id',
                 title: 'Sell ID',
-                sorting: ColumnSorting.Asc,
                 sortingEnabled: true,
             },
             {
                 id: 'product',
                 title: 'Product',
+                sorting: ColumnSorting.Asc,
+                grouping: true,
                 groupingEnabled: true,
                 sortingEnabled: true,
                 dragEnabled: true
