@@ -1,5 +1,5 @@
-import {ColumnSorting} from './ColumnSorting';
 import {ColumnGroupingValue} from './ColumnGroupingValue';
+import {ColumnSorting} from './ColumnSorting';
 
 export const ColumnJsonSchema = {
     'type': 'object',

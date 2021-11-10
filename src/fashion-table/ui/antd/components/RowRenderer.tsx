@@ -4,8 +4,7 @@ import {GridInstance} from '../../../core/GridInstance';
 import {RowInstance} from '../../../core/RowInstance';
 import {RowType} from '../../../schema/RowType';
 import CellRenderer from './CellRenderer';
-import ColumnsRenderer from './ColumnsRenderer';
-import GridRenderer from './GridRenderer';
+import RowsRenderer from './RowsRenderer';
 
 const {Panel} = Collapse;
 
@@ -15,7 +14,7 @@ const RowRenderer: FC<{ row: RowInstance, grid: GridInstance }> = ({row, grid}) 
             <Collapse className="grouped">
                 <Panel header={`分组 ${row.id}`} key={row.id}>
                     <p>
-                        <GridRenderer grid={grid} rows={row.embedRows}/>
+                        <RowsRenderer grid={grid} rows={row.embedRows}/>
                     </p>
                 </Panel>
             </Collapse>

@@ -55,8 +55,8 @@ export function createSells(products: Product[], sellers: Seller[], count: numbe
             id: i.toString(),
             product: randomIn<Product>(products).title,
             seller: randomIn<Seller>(sellers).name,
-            quantity: Math.floor(Math.random() * 10)+1,
-        })
+            quantity: Math.floor(Math.random() * 10) + 1,
+        });
     }
     return sells;
 }

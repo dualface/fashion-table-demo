@@ -5,9 +5,9 @@ import RowRenderer from './RowRenderer';
 
 const RowsRenderer: FC<{ grid: GridInstance, rows: RowInstance[] }> = ({grid, rows}) => {
     return (
-        <>
+        <div className="rows">
             {rows.map((row) => RowRenderer({row, grid}))}
-        </>
+        </div>
     );
 };
 
