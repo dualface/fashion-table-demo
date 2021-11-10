@@ -37,6 +37,10 @@
   .body {
     background-color: #efefef;
 
+    .grouped {
+      text-align: left;
+    }
+
     .row {
       display: flex;
       border-bottom: 1px solid #ddd;

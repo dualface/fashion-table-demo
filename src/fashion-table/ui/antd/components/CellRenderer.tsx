@@ -1,7 +1,7 @@
 import React, {FC} from 'react';
-import {CellState} from '../../../core/CellState';
+import {CellInstance} from '../../../core/CellInstance';
 
-const CellRenderer: FC<{ cell: CellState }> = ({cell}) => {
+const CellRenderer: FC<{ cell: CellInstance }> = ({cell}) => {
     return (
         <div key={cell.id} className="cell">
             {cell.content ? cell.content.toString() : 'null'}

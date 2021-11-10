@@ -1,5 +1,5 @@
 import {ColumnSchema} from '../schema/ColumnSchema';
-import {CellState} from './CellState';
+import {CellInstance} from './CellInstance';
 
 /**
  * 网格的一列
@@ -18,9 +18,9 @@ export class ColumnInstance {
     readonly schema: ColumnSchema;
 
     /**
-     * 该列包含的所有单元格
+     * 该列包含的所有单元格，按照行 ID 组织
      */
-    readonly cells: CellState[] = [];
+    readonly cells = new Map<string, CellInstance>();
 
     constructor(schema: ColumnSchema) {
         this.id = schema.id;
@@ -28,35 +28,46 @@ export class ColumnInstance {
     }
 
     /**
+     * 取得指定行的单元格
+     *
+     * @param rowId
+     */
+    getCell(rowId: string): CellInstance {
+        if (!this.cells.has(rowId)) {
+            throw new RangeError(`not found cell with rowId "${rowId}"`);
+        }
+        return this.cells.get(rowId)!;
+    }
+
+    /**
      * 交换两行的单元格
      *
-     * @param row1
-     * @param row2
+     * @param rowId1
+     * @param rowId2
      */
-    swapCells(row1: number, row2: number): void {
-        const l = this.cells.length;
-        if (row1 < 0 || row1 >= l) {
-            throw new RangeError(`row1 "${row1}" out of range, count of cells is ${l}`);
+    swapCells(rowId1: string, rowId2: string): void {
+        const l = this.cells.size;
+        if (!this.cells.has(rowId1)) {
+            throw new RangeError(`not found cell with rowId1 "${rowId1}"`);
         }
-        if (row2 < 0 || row2 >= l) {
-            throw new RangeError(`row2 "${row2}" out of range, count of cells is ${l}`);
+        if (!this.cells.has(rowId2)) {
+            throw new RangeError(`not found cell with rowId2 "${rowId2}"`);
         }
-        const cell = this.cells[row1];
-        this.cells[row1] = this.cells[row2];
-        this.cells[row2] = cell;
+        const cell1 = this.cells.get(rowId1)!;
+        const cell2 = this.cells.get(rowId2)!;
+        this.cells.set(rowId1, cell2);
+        this.cells.set(rowId2, cell1);
     }
 
     /**
      * 删除指定行的单元格
      *
-     * @param row
+     * @param rowId
      */
-    deleteCell(row: number): void {
-        const l = this.cells.length;
-        if (row < 0 || row >= l) {
-            throw new RangeError(`row "${row}" out of range, count of cells is ${l}`);
+    deleteCell(rowId: string): void {
+        if (!this.cells.has(rowId)) {
+            throw new RangeError(`not found cell with rowId "${rowId}"`);
         }
-        this.cells.splice(row, 1);
+        this.cells.delete(rowId);
     }
-
 }

@@ -1,25 +1,26 @@
 import React, {FC} from 'react';
 import {GridInstance} from '../../../core/GridInstance';
-import ColumnRenderer from './ColumnRenderer';
-import RowRenderer from './RowRenderer';
+import {RowInstance} from '../../../core/RowInstance';
+import ColumnsRenderer from './ColumnsRenderer';
+import {GridRenderOptions} from './GridRenderOptions';
+import RowsRenderer from './RowsRenderer';
 
-const GridRenderer: FC<{ grid: GridInstance }> = ({grid}) => {
+const GridRenderer: FC<{
+    grid: GridInstance,
+    rows: RowInstance[],
+    options?: GridRenderOptions
+}> = ({
+          grid,
+          rows,
+          options,
+      }) => {
     const columns = grid.schema.columns;
-    const countOfRows = grid.rows.length;
-    const rowsRender = [];
-
-    for (let index = 0; index < countOfRows; index++) {
-        const row = grid.rows.get(index);
-        rowsRender.push(RowRenderer({row, cells: grid.queryCellsInRow(index)}));
-    }
     return (
         <div className="fashion-table">
-            <h1>{grid.schema.id}</h1>
-            <div className="header">
-                {columns.map((column) => ColumnRenderer({column}))}
-            </div>
+            {options && options.title && <h1>{grid.schema.id}</h1>}
+            {options && options.columns && <ColumnsRenderer grid={grid}/>}
             <div className="body">
-                {rowsRender}
+                <RowsRenderer grid={grid} rows={rows}/>
             </div>
         </div>
     );

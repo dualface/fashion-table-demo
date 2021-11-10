@@ -1,7 +1,8 @@
-export interface Identifiable {
-    id: string;
-}
+import {Identifiable} from './Identifiable';
 
+/**
+ * 泛型排序 Map
+ */
 export class GenericOrderedMap<T extends Identifiable> implements Iterable<T> {
     private readonly _orderedIds: string[] = [];
     private readonly _items = new Map<string, T>();

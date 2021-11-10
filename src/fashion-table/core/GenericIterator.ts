@@ -1,4 +1,4 @@
-import {CellState} from './CellState';
+import {CellInstance} from './CellInstance';
 
 /**
  * 迭代器回调
@@ -46,5 +46,5 @@ export class GenericIterator<T> implements Iterable<T> {
 /**
  * 单元格迭代器
  */
-export class CellIterator extends GenericIterator<CellState> {
+export class CellIterator extends GenericIterator<CellInstance> {
 }
