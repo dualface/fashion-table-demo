@@ -5,7 +5,7 @@ import CellRenderer from './CellRenderer';
 
 const RowRenderer: FC<{ row: RowInstance, cells: CellIterator }> = ({row, cells}) => {
     return (
-        <div key={row.id} className="fashion-table-row">
+        <div key={row.id} className="row">
             {cells.map((cell) => CellRenderer({cell}))}
         </div>
     );

@@ -1,0 +1,76 @@
+.App {
+  text-align: center;
+  padding: 2em;
+}
+
+.fashion-table {
+  margin: 10pt;
+
+  .header {
+    background-color: #9cf;
+    display: flex;
+    border-bottom: 2px solid #999;
+
+    .column {
+      flex: 1;
+      padding: 4pt;
+      border-right: 1px solid #8be;
+      display: flex;
+
+      :last-child {
+        border-right: none;
+      }
+
+      .title {
+        flex: 1;
+      }
+
+      .dropdown {
+        width: 20pt;
+        color: #333;
+      }
+
+    }
+  }
+
+
+  .body {
+    background-color: #efefef;
+
+    .row {
+      display: flex;
+      border-bottom: 1px solid #ddd;
+
+      :last-child {
+        border-bottom: none;
+      }
+
+      .cell {
+        flex: 1;
+        padding: 4pt;
+        border-right: 1px solid #ddd;
+
+        :last-child {
+          border-right: none;
+        }
+      }
+    }
+  }
+}
+
+.fashion-table-dropdown-menu {
+  width: 16em;
+
+  .ant-dropdown-menu-title-content {
+    display: flex;
+
+    a {
+      flex: 1;
+    }
+
+    .checked {
+      width: 10pt;
+      line-height: inherit;
+    }
+  }
+}

@@ -14,10 +14,11 @@ const GridRenderer: FC<{ grid: GridInstance }> = ({grid}) => {
     }
     return (
         <div className="fashion-table">
-            <div className="fashion-table-header">
+            <h1>{grid.schema.id}</h1>
+            <div className="header">
                 {columns.map((column) => ColumnRenderer({column}))}
             </div>
-            <div className="fashion-table-body">
+            <div className="body">
                 {rowsRender}
             </div>
         </div>

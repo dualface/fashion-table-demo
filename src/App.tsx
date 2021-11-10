@@ -1,7 +1,7 @@
 import 'antd/dist/antd.css';
 import 'moment/locale/zh-cn';
 import React from 'react';
-import './App.css';
+import './App.scss';
 import {createProducts, createSellers, createSells} from './demo/DataFactory';
 import {GridInstance} from './fashion-table/core/GridInstance';
 import {JsonDataSource} from './fashion-table/datasource/JsonDataSource';
