@@ -10,7 +10,7 @@ import GridRenderer from './fashion-table/ui/antd/components/GridRenderer';
 
 const products = createProducts(15);
 const sellers = createSellers(6);
-const sells = createSells(products, sellers, 2000);
+const sells = createSells(products, sellers, 500);
 const dataset = JSON.stringify(sells);
 
 function App() {
@@ -35,6 +35,7 @@ function App() {
                 id: 'seller',
                 title: 'Seller',
                 sorting: ColumnSorting.Desc,
+                grouping: true,
                 groupingEnabled: true,
                 sortingEnabled: true,
                 dragEnabled: true,
